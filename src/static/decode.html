@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Link Düzenleyici | İnci Holding</title>
+        <!-- <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://code.jquery.com https://cdn.jsdelivr.net"> -->
+        <link href="plugins/bootstrap.min.css" rel="stylesheet">
+        <style>
+            .container {
+                width: 100%;
+                text-align: center;
+                margin-top: 70px;
+            }
+            .textArea {
+                width: 400px;
+                border-radius: 10px;
+                margin-top: 30px;
+                overflow-y: scroll;
+                height: 200px;
+            }
+            .textArea:focus {
+                border: none;
+                border-style: none;
+            }
+            .textArea:first-of-type{
+                margin-right: 20px;
+            }
+            .button {
+                margin-top: 20px;
+                width: 500px;
+                border-radius: 10px;
+            }
+            ::-webkit-scrollbar {
+                width: 10px;
+                
+            }
+            ::-webkit-scrollbar-track {
+                background: #f1f1f1; 
+                border-radius: 10px;
+                margin-top: 5px;
+                margin-bottom: 5px;
+            }
+            ::-webkit-scrollbar-thumb {
+                background: #888; 
+            }
+            .inputContainer{
+                margin: auto;
+            }
+            ::-webkit-input-placeholder { 
+                font-size: 12px;
+                font-style: italic;
+                padding-top: 5px;
+                padding-left: 5px;
+                color: #6c757d;
+            }
+            :-ms-input-placeholder { 
+                font-size: 12px;
+                font-style: italic;
+                padding-top: 5px;
+                padding-left: 5px;
+                color: #6c757d;
+            }
+            ::placeholder {
+                font-size: 12px;
+                font-style: italic;
+                padding-top: 5px;
+                padding-left: 5px;
+                color: #6c757d;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <img class="logo" src="https://www.inciholding.com/mp-include/uploads/2017/12/rsz-1inci-holding-v2.png">
+            <div class="inputContainer">
+                <textarea id="text" class="textArea" placeholder="Düzeltilecek link.."></textarea>
+                <textarea id="textDecoded" class="textArea" placeholder="Düzeltilmiş link.."></textarea>
+            </div>
+            <input id="decode" type="button" class="btn btn-danger button" value="Düzelt" />
+        </div>
+
+        <script src="plugins/jquery-3.6.0.min.js"></script>
+        <script src="plugins/bootstrap.bundle.min.js"></script>
+        <script>
+            $('#decode').click(function(){
+                var text = $('#text').val();
+                
+                if(text){
+                    const param = getParameterByName("u", text);
+
+                    if(param){
+                        $('#textDecoded').val(param);
+                    }
+                    else {
+                        $('#textDecoded').val(getParameterByName("url", text));
+                    }
+                }
+                else {
+                    alert("Lütfen çevirilmesini istediğiniz linki ekleyin.")
+                }
+            });
+
+            function getParameterByName(name, url = window.location.href) {
+                name = name.replace(/[\[\]]/g, '\\$&');
+                var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+                    results = regex.exec(url);
+                if (!results) return null;
+                if (!results[2]) return '';
+                return decodeURIComponent(results[2].replace(/\+/g, ' '));
+            }
+        </script>
+    </body>
+</html>
