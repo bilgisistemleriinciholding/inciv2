@@ -1,68 +1,64 @@
 import axios from 'axios'
 
 const service = axios.create({
-  baseURL: process.env.VUE_APP_BASE_API || "https://apiv2.inciholding.com/service",
-  timeout: 1000 * 30 // 30 saniye timeout
+  baseURL: process.env.VUE_APP_BASE_API, // url = base url + request url
+  // withCredentials: true, // send cookies when cross-domain requests
+  timeout: 1000 * 30 // request timeout
 })
+//console.log(service);
 
-// ✅ Request Interceptor
 service.interceptors.request.use(
   config => {
-    // Giden isteği logla
-    console.log("[AXIOS REQUEST]", {
-      method: config.method,
-      url: config.baseURL + config.url,
-      data: config.data,
-      headers: config.headers,
-    })
-
+    // do something before request is sent
+    if (!config.baseURL) {
+      config.baseURL = "https://api.inciholding.com";
+    }
+    //if (store.getters.token) {
+    //  // let each request carry token
+    //  // ['X-Token'] is a custom headers key
+    //  // please modify it according to the actual situation
+    //  //config.headers['Authorization'] = "Bearer " + getToken()
+    //}
     return config
   },
   error => {
-    console.error("[AXIOS REQUEST ERROR]", error)
+    // do something with request error
     return Promise.reject(error)
   }
 )
-
-// ✅ Response Interceptor
 service.interceptors.response.use(
+  /**
+   * If you want to get http information such as headers or status
+   * Please return  response => response
+  */
+
+  /**
+   * Determine the request status by custom code
+   * Here is just an example
+   * You can also judge the status by HTTP Status Code
+   */
   response => {
     const res = response.data
 
-    // Başarısız özel durum
+    // if the custom code is not 20000, it is judged as an error.
     if (res.success !== true) {
-      console.warn("[AXIOS RESPONSE WARNING]", {
-        url: response.config.url,
-        message: res.message || "Unknown error",
-      })
-      return Promise.reject(new Error(res.message || 'Error'))
-    }
 
-    // Başarılı cevap
-    return res
+      return Promise.reject(new Error(res.message || 'Error'))
+    } else {
+
+      if (res.message) {
+        //console.log(res.message);
+      }
+
+      return res
+    }
   },
   error => {
-    // HTTP hata durumu
-    if (error.response) {
-      console.error("[AXIOS RESPONSE ERROR]", {
-        url: error.config?.url,
-        status: error.response.status,
-        data: error.response.data,
-        headers: error.response.headers,
-      })
-    } else if (error.request) {
-      // Sunucu hiç cevap vermedi
-      console.error("[AXIOS NETWORK ERROR]", {
-        url: error.config?.url,
-        message: "Sunucu cevap vermedi.",
-      })
-    } else {
-      // Axios dışında JS hatası
-      console.error("[AXIOS SETUP ERROR]", error.message)
-    }
+    //console.log('err' + error) // for debug
 
     return Promise.reject(error)
   }
 )
 
 export default service
+
