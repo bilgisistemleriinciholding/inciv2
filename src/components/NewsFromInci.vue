@@ -6,7 +6,7 @@
         class="group border-2 border-inci_gray_extra_light transition-colors hover:border-inci_red rounded-br-[52px]"
       >
         <a :href="baseUrl.replace(':id', item.path)" class="block">
-          <Pic
+          <Pic2
             class="max-w-full h-40 md:h-60 object-contain mx-auto px-2"
             :src="item.image"
             :alt="item.title"
