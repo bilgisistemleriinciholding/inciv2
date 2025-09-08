@@ -1,5 +1,15 @@
 <template>
-  <nuxt-img v-bind="$attrs" :src="aliasedUrl(src)" quality="80" loading="lazy" format="webp" :alt="alt" :sizes="sizes" />
+  <nuxt-img
+  v-bind="$attrs"
+  :src="aliasedUrl(src)"
+  quality="80"
+  loading="lazy"
+  format="webp"
+  :alt="alt"
+  :sizes="sizes"
+  :img-attrs="{ class: $attrs.class }"
+/>
+
 </template>
 
 <script>
