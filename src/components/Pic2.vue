@@ -1,31 +1,24 @@
 <template>
-  <nuxt-img
-  v-bind="$attrs"
-  :src="aliasedUrl(src)"
-  quality="80"
-  loading="lazy"
-  format="webp"
-  :alt="alt"
-  :sizes="sizes"
-  :img-attrs="{ class: $attrs.class }"
-/>
-
+  <img
+    v-bind="$attrs"
+    :src="src"
+    :alt="alt"
+    loading="lazy"
+  />
 </template>
 
 <script>
 export default {
   name: "Pic",
-  inheritAttrs: false, // opsiyonel, ama attr'ların kontrolünü bileşende tutarsın
+  inheritAttrs: false, // class ve diğer attributelar img’ye gitsin
   props: {
-    alt: { type: String },
-    src: { type: String },
-    sizes: { type: String }
-  },
-  methods: {
-    aliasedUrl(fullUrl) {
-      if (fullUrl.indexOf("https://") > -1 || fullUrl.indexOf("http://") > -1)
-        return fullUrl.replace(process.env.VUE_APP_IMG_PATH + "/Uploads/images", "/cdnimg");
-      return fullUrl;
+    src: {
+      type: String,
+      required: true
+    },
+    alt: {
+      type: String,
+      default: ""
     }
   }
 };

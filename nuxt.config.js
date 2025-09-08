@@ -257,7 +257,6 @@ head: {
     },
     image: {
       domains: ["api.inciholding.com"],
-      provider: 'none',
       alias: { cdnimg: "https://api.inciholding.com/Uploads/images" },
     },
     recaptcha: {
