@@ -75,7 +75,7 @@
             <div
               class="w-52 lg:w-72 mx-auto flex flex-col items-center justify-center text-center"
             >
-              <Pic
+              <Pic2
                 class="w-full object-cover border-12 lg:border-16 border-inci_gray_light mb-3"
                 :src="item.image"
                 :alt="item.name"
