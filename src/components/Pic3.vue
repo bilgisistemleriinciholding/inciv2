@@ -4,7 +4,7 @@
 
 <script>
   export default {
-    name: "Pic",
+    name: "Pic3",
     props: {
       alt: { type: String }, src: { type: String }, sizes: { type: String }
     }

@@ -4,6 +4,8 @@
     <Header :menu="menuList" />
     <Nuxt keep-alive />
     <Footer :menu="menuList" />
+    
+    <!--
     <CookieControl class="w-full">
       <template v-slot:bar class="w-full">
         <div class="w-full">
@@ -17,6 +19,7 @@
         </div>
       </template>
     </CookieControl>
+    -->
   </div>
 </template>
 

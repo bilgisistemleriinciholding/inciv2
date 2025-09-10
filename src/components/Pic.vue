@@ -10,7 +10,7 @@
 <script>
 export default {
   name: "Pic",
-  inheritAttrs: false, // class ve diğer attributelar img’ye gitsin
+  inheritAttrs: true,
   props: {
     src: {
       type: String,

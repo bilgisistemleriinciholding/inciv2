@@ -96,6 +96,8 @@
             :alt="item.title"
           />
 
+          <!--lg:grayscale lg:grayscale-0-->
+
           <a
             :href="detailPageSettings.route.replace(':id', item.path)"
             class="uppercase text-xs md:text-base lg:text-2xl text-white leading-5 md:leading-7 lg:leading-10 bg-black bg-opacity-50 p-1 lg:p-6 min-w-full absolute left-0 bottom-0 lg:-bottom-full effect-marley transform-gpu line-clamp-3"
@@ -941,6 +943,7 @@ body {
 <script>
 import animations from "@/components/index/indexAnimation.js";
 import Pic from "../components/Pic.vue";
+import Pic3 from "../components/Pic3.vue";
 
 import Hero from "@/components/index/Hero.vue";
 import heroService from "@/services/heroService.js";
@@ -952,7 +955,7 @@ import slugify from "@/util/slugify.js";
 export default {
   layout: "default",
   name: "IndexPage",
-  components: { Hero, Pic },
+  components: { Hero, Pic,Pic3 },
   async asyncData({ i18n }) {
     const heroData = await heroService.loadHero(i18n.locale);
 
